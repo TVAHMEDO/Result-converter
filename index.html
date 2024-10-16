@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks to JS Object</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+p {
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  color: #00ffcc;  /* Neon greenish-cyan color */
+  text-shadow: 
+    0 0 5px #00ffcc,    /* Primary glow */
+    0 0 10px #00ffcc,   /* Secondary glow */
+    0 0 20px #00ffcc,   /* Outer glow */
+    0 0 30px #00ff99,   /* Slight color variation for depth */
+    0 0 40px #00ff66,
+    0 0 50px #00ff33;
+
+  /* Optional effects for the neon theme */
+  background-color: black; /* Makes neon stand out */
+  padding: 10px;
+  border-radius: 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    	<p class="name"><em> AHMED_XD <em></p>
+        <h2>Student Marks to Coding object</h2>
+
+        <label for="name">Student Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" placeholder="Enter your roll number">
+
+        <label for="sindhi">Sindhi Marks:</label>
+        <input type="number" id="sindhi" placeholder="Enter Sindhi marks">
+
+        <label for="english">English Marks:</label>
+        <input type="number" id="english" placeholder="Enter English marks">
+
+        <label for="science">Science Marks:</label>
+        <input type="number" id="science" placeholder="Enter Science marks">
+
+        <label for="math">Math Marks:</label>
+        <input type="number" id="math" placeholder="Enter Math marks">
+
+        <label for="urdu">Urdu Marks:</label>
+        <input type="number" id="urdu" placeholder="Enter Urdu marks">
+
+        <label for="islamiyat">Islamiyat Marks:</label>
+        <input type="number" id="islamiyat" placeholder="Enter Islamiyat marks">
+
+        <button onclick="generateStudentObject()">Generate JS Object</button>
+        <button onclick="copyToClipboard()">Copy</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function generateStudentObject() {
+            // Get input values, default to 0 if the field is empty
+            let name = document.getElementById('name').value || "Unnamed";
+            let rollNumber = parseInt(document.getElementById('rollNumber').value) || 0;
+            let sindhi = parseFloat(document.getElementById('sindhi').value) || 0;
+            let english = parseFloat(document.getElementById('english').value) || 0;
+            let science = parseFloat(document.getElementById('science').value) || 0;
+            let math = parseFloat(document.getElementById('math').value) || 0;
+            let urdu = parseFloat(document.getElementById('urdu').value) || 0;
+            let islamiyat = parseFloat(document.getElementById('islamiyat').value) || 0;
+
+            // Calculate total marks
+            let totalMarks = sindhi + english + science + math + urdu + islamiyat;
+
+            // Max marks (assuming each subject is out of 100, so 700 in total)
+            let maxMarks = 700;
+
+            // Calculate percentage
+            let percentage = (totalMarks / maxMarks) * 100;
+
+            // Create student object (formatted to one line)
+            let studentObject = `{ name: "${name}", rollNumber: ${rollNumber}, marks: { Sindhi: ${sindhi}, English: ${english}, Science: ${science}, Math: ${math}, Urdu: ${urdu}, Islamiyat: ${islamiyat} }, total: ${totalMarks}, percentage: ${percentage.toFixed(2)} }`;
+
+            // Display the JS object in one line
+            let result = document.getElementById('result');
+            result.innerText = studentObject;
+        }
+
+        // Function to copy the result to clipboard
+        function copyToClipboard() {
+            let result = document.getElementById('result').innerText;
+            navigator.clipboard.writeText(result).then(function() {
+                alert("Copied to clipboard!");
+            }, function() {
+                alert("Failed to copy!");
+            });
+        }
+    </script>
+</body>
+</html>
